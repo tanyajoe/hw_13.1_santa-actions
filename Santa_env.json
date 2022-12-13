@@ -1,0 +1,99 @@
+{
+	"id": "95c8d426-4e02-4b48-835e-f7dbae07934a",
+	"name": "Santa",
+	"values": [
+		{
+			"key": "santsURL",
+			"value": "https://staging.lpitko.ru/api/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "cookie",
+			"value": "_ym_uid=1668804410974843689; _ym_d=1668804410; connect.sid=s:Ed1lXKY-6I7PZ1HO_SAo_T0Gk8A9aZla.cywJRWPI8pJiel6DTSDDWyFmW/xQoHTx7JJtRZNaANo; _ga=GA1.2.151271937.1670150805; _ym_isad=2; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMwMDAwMTUsImlhdCI6MTY3MDc4OTY4MSwiZXhwIjoxNjcwNzkzMjgxfQ.ePEY041nPK1N9jDhiNM8JTVlTfjwNnTELPhitp98Gwo",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "picture",
+			"value": "tree",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "cashLimit",
+			"value": "5",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "cashLimitCurrency",
+			"value": "eur",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "changedPicture",
+			"value": "santa",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "changedCashLimit",
+			"value": "1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "changedCashLimitCurrency",
+			"value": "eur",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "pictureBox2",
+			"value": "tree",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "cashLimitBox2",
+			"value": "1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "cashLimitCurrencyBox2",
+			"value": "eur",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "invalidCashLimit",
+			"value": "0",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "key",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "validPass",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "invalidPass",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-12-12T20:45:35.524Z",
+	"_postman_exported_using": "Postman/10.5.8"
+}
