@@ -1,0 +1,935 @@
+{
+	"info": {
+		"_postman_id": "4d0c9d02-b10a-4d0d-9030-6222868d7dc3",
+		"name": "3. BOX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "24902473-4d0c9d02-b10a-4d0d-9030-6222868d7dc3"
+	},
+	"item": [
+		{
+			"name": "Box-notifications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "16969af9-44c7-4314-b257-94c65013ec98"
+					}
+				}
+			],
+			"id": "013eb211-4408-4224-99e8-7cdeca73aad0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}account/notifications",
+					"host": [
+						"{{santsURL}}account"
+					],
+					"path": [
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get boxes key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"key\", responseBody);"
+						],
+						"type": "text/javascript",
+						"id": "fcbb0e7e-31cd-4bcb-bc71-05d8f6c1ce33"
+					}
+				}
+			],
+			"id": "5aa00a9f-1b34-4df5-ab9b-09574675992f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}box/key",
+					"host": [
+						"{{santsURL}}box"
+					],
+					"path": [
+						"key"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create box1 with cash limit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const dataRequest = JSON.parse(request.data)\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"\r",
+							"pm.test(\"Name of the new Box returns entered name\", () => {\r",
+							"    pm.expect(response.box.name).to.eql(dataRequest.name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Picture of the new Box returns choosen picture\", () => {\r",
+							"    pm.expect(response.box.picture).to.eql(dataRequest.picture)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"usePost of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.usePost).to.eql(dataRequest.usePost)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"useCashLimit of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useCashLimit).to.eql(dataRequest.useCashLimit)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"let cashLimit = dataRequest.cashLimit;\r",
+							"let cashLimitCurrency = dataRequest.cashLimitCurrency;\r",
+							"//console.log(cashLimit)\r",
+							"//console.log(cashLimitCurrency)\r",
+							"\r",
+							"pm.test(\"Cash Limit returns entered value\", () => {\r",
+							"    pm.expect(response.box.cashLimit).to.eql(cashLimit)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Cash Limit Currency returns choosen currency\", () => {\r",
+							"    pm.expect(response.box.cashLimitCurrency).to.eql(cashLimitCurrency)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using wish of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useWish).to.eql(dataRequest.useWish)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using names of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useNames).to.eql(dataRequest.useNames)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Phone requirement of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.isPhoneRequired).to.eql(dataRequest.isPhoneRequired)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "df46f1a9-1495-46a0-8940-133d9e98141e"
+					}
+				}
+			],
+			"id": "fc4abde6-2841-4005-afc9-d42fb05ecd6c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": null,\r\n    \"name\": \"{{$randomNoun}}\",\r\n    \"key\": \"{{key}}\",\r\n    \"picture\": \"{{picture}}\",\r\n    \"usePost\": {{$randomBoolean}},\r\n    \"useCashLimit\": true,\r\n    \"cashLimit\": {{cashLimit}},\r\n    \"cashLimitCurrency\": \"{{cashLimitCurrency}}\",\r\n    \"useWish\": {{$randomBoolean}},\r\n    \"useCircleDraw\": null,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isArchived\": null,\r\n    \"createAdminCard\": null,\r\n    \"isCreated\": true,\r\n    \"useNames\": {{$randomBoolean}},\r\n    \"isPhoneRequired\": {{$randomBoolean}},\r\n    \"logo\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{santsURL}}box",
+					"host": [
+						"{{santsURL}}box"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get box1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"let keyOfTheBox = pm.environment.get(\"key\");\r",
+							"\r",
+							"pm.test(\"Key of the new Box returns entered key\", () => {\r",
+							"    pm.expect(response.box.key).to.eql(keyOfTheBox)\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"id": "d1927385-8fc3-4889-84e5-22bfbd0a4733"
+					}
+				}
+			],
+			"id": "750dd878-7a8b-4c30-bbd7-e745c5709fcd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}box/{{key}}",
+					"host": [
+						"{{santsURL}}box"
+					],
+					"path": [
+						"{{key}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Box1 edit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const dataRequest = JSON.parse(request.data)\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"\r",
+							"pm.test(\"Name of the Box returns edited name\", () => {\r",
+							"    pm.expect(response.box.name).to.eql(dataRequest.name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Picture of the new Box returns choosen picture\", () => {\r",
+							"    pm.expect(response.box.picture).to.eql(dataRequest.picture)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"usePost of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.usePost).to.eql(dataRequest.usePost)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"useCashLimit of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useCashLimit).to.eql(dataRequest.useCashLimit)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"let changedCashLimit = dataRequest.cashLimit;\r",
+							"let changedCashLimitCurrency = dataRequest.cashLimitCurrency;\r",
+							"//console.log(changedCashLimit)\r",
+							"//console.log(changedCashLimitCurrency)\r",
+							"\r",
+							"pm.test(\"Cash Limit returns changed value\", () => {\r",
+							"    pm.expect(response.box.cashLimit).to.eql(changedCashLimit)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Cash Limit Currency returns chaged currency\", () => {\r",
+							"    pm.expect(response.box.cashLimitCurrency).to.eql(changedCashLimitCurrency)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using wish of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useWish).to.eql(dataRequest.useWish)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using names of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useNames).to.eql(dataRequest.useNames)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Phone requirement of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.isPhoneRequired).to.eql(dataRequest.isPhoneRequired)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "b4c60b24-c790-45cb-884f-b8f8950e501c"
+					}
+				}
+			],
+			"id": "d136a5c1-35b4-460a-8f41-9aa7f4172065",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": null,\r\n  \"name\": \"{{$randomNoun}}\",\r\n  \"key\": \"{{key}}\",\r\n  \"picture\": \"{{changedPicture}}\",\r\n  \"usePost\": {{$randomBoolean}},\r\n  \"useCashLimit\": true,\r\n  \"cashLimit\": {{changedCashLimit}},\r\n  \"cashLimitCurrency\": \"{{changedCashLimitCurrency}}\",\r\n  \"useWish\": {{$randomBoolean}},\r\n  \"useCircleDraw\": null,\r\n  \"isInviteAfterDraw\": null,\r\n  \"isArchived\": null,\r\n  \"createAdminCard\": null,\r\n  \"isCreated\": null,\r\n  \"useNames\": {{$randomBoolean}},\r\n  \"isPhoneRequired\": {{$randomBoolean}},\r\n  \"logo\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{santsURL}}box",
+					"host": [
+						"{{santsURL}}box"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete box1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let response = responseBody\r",
+							"pm.test(\"responseBody returns OK\", () => {\r",
+							"    pm.expect(response).to.eql(\"OK\")\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"id": "f88dfb34-ce5a-4de3-81cd-350d42f99feb"
+					}
+				}
+			],
+			"id": "43fee8d1-91d3-4bc4-a909-caa2121c4f94",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}box/{{key}}",
+					"host": [
+						"{{santsURL}}box"
+					],
+					"path": [
+						"{{key}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get boxes key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"key\", responseBody);"
+						],
+						"type": "text/javascript",
+						"id": "b5d625ea-c776-4c12-9f1a-b9f39eeca02b"
+					}
+				}
+			],
+			"id": "c87c7079-536d-4a13-a011-0f3fe6df5209",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}box/key",
+					"host": [
+						"{{santsURL}}box"
+					],
+					"path": [
+						"key"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create box2 without cash limit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const dataRequest = JSON.parse(request.data)\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"\r",
+							"pm.test(\"Name of the new Box returns entered name\", () => {\r",
+							"    pm.expect(response.box.name).to.eql(dataRequest.name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Picture of the new Box returns choosen picture\", () => {\r",
+							"    pm.expect(response.box.picture).to.eql(dataRequest.picture)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"usePost of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.usePost).to.eql(dataRequest.usePost)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"useCashLimit of the new Box returns false\", () => {\r",
+							"    pm.expect(response.box.useCashLimit).to.eql(dataRequest.useCashLimit)\r",
+							"})\r",
+							"\r",
+							"//let cashLimit = pm.environment.get(\"cashLimitBox2\");\r",
+							"//let cashLimitCurrency = pm.environment.get(\"cashLimitCurrencyBox2\");\r",
+							"//console.log(cashLimit)\r",
+							"//console.log(cashLimitCurrency)\r",
+							"\r",
+							"pm.test(\"Cash Limit returns null\", () => {\r",
+							"    pm.expect(response.box.cashLimit).to.eql(null)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Cash Limit Currency returns null\", () => {\r",
+							"    pm.expect(response.box.cashLimitCurrency).to.eql(null)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using wish of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useWish).to.eql(dataRequest.useWish)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using names of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useNames).to.eql(dataRequest.useNames)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Phone requirement of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.isPhoneRequired).to.eql(dataRequest.isPhoneRequired)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "b22ff0fa-69e7-4498-851f-d6acf9d07330"
+					}
+				}
+			],
+			"id": "d8391ac8-a0dc-4573-95c3-cc2a9440dfe4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": null,\r\n    \"name\": \"{{$randomNoun}}\",\r\n    \"key\": \"{{key}}\",\r\n    \"picture\": \"{{pictureBox2}}\",\r\n    \"usePost\": {{$randomBoolean}},\r\n    \"useCashLimit\": false,\r\n    \"cashLimit\": {{cashLimitBox2}},\r\n    \"cashLimitCurrency\": \"{{cashLimitCurrencyBox2}}\",\r\n    \"useWish\": {{$randomBoolean}},\r\n    \"useCircleDraw\": null,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isArchived\": null,\r\n    \"createAdminCard\": null,\r\n    \"isCreated\": true,\r\n    \"useNames\": {{$randomBoolean}},\r\n    \"isPhoneRequired\": {{$randomBoolean}},\r\n    \"logo\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{santsURL}}box",
+					"host": [
+						"{{santsURL}}box"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Box2 edit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const dataRequest = JSON.parse(request.data)\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"\r",
+							"pm.test(\"Name of the Box returns edited name\", () => {\r",
+							"    pm.expect(response.box.name).to.eql(dataRequest.name)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Picture of the new Box returns choosen picture\", () => {\r",
+							"    pm.expect(response.box.picture).to.eql(dataRequest.picture)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"usePost of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.usePost).to.eql(dataRequest.usePost)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"useCashLimit of the Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useCashLimit).to.eql(dataRequest.useCashLimit)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"let changedCashLimit = dataRequest.cashLimit;\r",
+							"let changedCashLimitCurrency = dataRequest.cashLimitCurrency;\r",
+							"//console.log(changedCashLimit)\r",
+							"//console.log(changedCashLimitCurrency)\r",
+							"\r",
+							"pm.test(\"Cash Limit returns changed value\", () => {\r",
+							"    pm.expect(response.box.cashLimit).to.eql(changedCashLimit)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Cash Limit Currency returns chaged currency\", () => {\r",
+							"    pm.expect(response.box.cashLimitCurrency).to.eql(changedCashLimitCurrency)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using wish of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useWish).to.eql(dataRequest.useWish)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Using names of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.useNames).to.eql(dataRequest.useNames)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Phone requirement of the new Box returns choosen value\", () => {\r",
+							"    pm.expect(response.box.isPhoneRequired).to.eql(dataRequest.isPhoneRequired)\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "6dd72984-f7ae-45bd-9b53-d57b8b141bc6"
+					}
+				}
+			],
+			"id": "3ae806ca-2af8-419b-9def-dc8efbb1d116",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": null,\r\n  \"name\": \"{{$randomNoun}}\",\r\n  \"key\": \"{{key}}\",\r\n  \"picture\": \"tree\",\r\n  \"usePost\": {{$randomBoolean}},\r\n  \"useCashLimit\": true,\r\n  \"cashLimit\": {{cashLimitBox2}},\r\n  \"cashLimitCurrency\": \"{{cashLimitCurrencyBox2}}\",\r\n  \"useWish\": {{$randomBoolean}},\r\n  \"useCircleDraw\": null,\r\n  \"isInviteAfterDraw\": null,\r\n  \"isArchived\": null,\r\n  \"createAdminCard\": null,\r\n  \"isCreated\": null,\r\n  \"useNames\": {{$randomBoolean}},\r\n  \"isPhoneRequired\": {{$randomBoolean}},\r\n  \"logo\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{santsURL}}box",
+					"host": [
+						"{{santsURL}}box"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete box2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let response = responseBody\r",
+							"pm.test(\"responseBody returns OK\", () => {\r",
+							"    pm.expect(response).to.eql(\"OK\")\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"id": "f737fdaf-1737-4bc9-be9c-da54f0700b00"
+					}
+				}
+			],
+			"id": "682538cd-6af2-4b69-818d-b82a04be7bab",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}box/{{key}}",
+					"host": [
+						"{{santsURL}}box"
+					],
+					"path": [
+						"{{key}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get boxes key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"key\", responseBody);"
+						],
+						"type": "text/javascript",
+						"id": "189a34e3-146e-49d0-a5d5-1d7dd10a9146"
+					}
+				}
+			],
+			"id": "1d69b456-839c-4f44-b281-3da7f8a84ace",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}box/key",
+					"host": [
+						"{{santsURL}}box"
+					],
+					"path": [
+						"key"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create box3 with invalid cash limit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"id": "335389d7-e5e8-4d68-b990-c66db9e13a25"
+					}
+				}
+			],
+			"id": "2a802b44-6250-48dc-92ec-c2eca03bdc51",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": null,\r\n    \"name\": \"{{$randomNoun}}\",\r\n    \"key\": \"{{key}}\",\r\n    \"picture\": \"{{picture}}\",\r\n    \"usePost\": {{$randomBoolean}},\r\n    \"useCashLimit\": true,\r\n    \"cashLimit\": {{invalidCashLimit}},\r\n    \"cashLimitCurrency\": \"{{cashLimitCurrency}}\",\r\n    \"useWish\": {{$randomBoolean}},\r\n    \"useCircleDraw\": null,\r\n    \"isInviteAfterDraw\": null,\r\n    \"isArchived\": null,\r\n    \"createAdminCard\": null,\r\n    \"isCreated\": true,\r\n    \"useNames\": {{$randomBoolean}},\r\n    \"isPhoneRequired\": {{$randomBoolean}},\r\n    \"logo\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{santsURL}}box",
+					"host": [
+						"{{santsURL}}box"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get boxes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"id": "7daa6b2f-3a93-498c-9668-727e3f23fa27"
+					}
+				}
+			],
+			"id": "a06c1724-3ab7-45ca-8aae-c879b90dcb3a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{santsURL}}account/boxes",
+					"host": [
+						"{{santsURL}}account"
+					],
+					"path": [
+						"boxes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "103b0511-34af-4e7f-8035-0bc9aecccc1b"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "923af623-91cf-444e-9086-d94e542ccfa4"
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "acf03f59-7fc9-4db6-8830-00c041331403",
+			"key": "cookieForBox",
+			"value": "=",
+			"disabled": true
+		},
+		{
+			"id": "c0a1563c-aaf0-40f8-8428-2ab3e0eca20b",
+			"key": "keyOfTheBox",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"id": "9c62f805-1f2c-4d35-9b03-58374e7e9caf",
+			"key": "nameOfTheBox",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "de89e076-80f4-4848-9281-261e5ebf855e",
+			"key": "pictureOfTheBox",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "4a542b0c-e7d9-421e-ad72-fcb62d214f87",
+			"key": "cashLimitOfTheBox",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "a2f33ac4-84c5-4b90-9752-516b06d23b09",
+			"key": "cashLimitCurrensyOfTheBox",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "414bfcb4-27c0-47b3-8b2a-dc14c54245ce",
+			"key": "valueUsePost",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "2e108c5f-c539-452c-b364-f97199ee0893",
+			"key": "valueUseWish",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "a90b7107-a8b4-43f4-b770-135b46784ff3",
+			"key": "valueUseNames",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "94b4ae3b-bd58-4633-8658-0ebd9a0f2d75",
+			"key": "PhoneRequired",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "4357f7b8-3e68-45af-8023-43936bbafa1a",
+			"key": "valueUseCashLimit",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "bbe7424d-9f38-446e-abab-412d23dffabd",
+			"key": "changedPictureOfTheBox",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "10941bbc-e5a6-414f-9a73-42fcf0ba52de",
+			"key": "changedCashLimitOfTheBox",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "6acd3c1b-f0b5-4daf-b25b-0f1ae9877884",
+			"key": "changedCashLimitCurrensyOfTheBox",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "a6765362-a595-455d-b1b6-ff6cf12a29ec",
+			"key": "a6765362-a595-455d-b1b6-ff6cf12a29ec",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "28f0b51d-80e2-4db0-a422-96e7c86741ae",
+			"key": "key",
+			"value": "",
+			"disabled": true
+		}
+	]
+}
